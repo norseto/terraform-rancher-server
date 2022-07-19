@@ -11,7 +11,7 @@ variable "rancher_current_password" {
 
 variable "rancher_version" {
   type        = string
-  default     = "2.2.9"
+  default     = "2.6.6"
   description = "Version of Rancher to install"
 }
 
@@ -120,7 +120,7 @@ variable "instance_ssh_user" {
 
 variable "certmanager_version" {
   type        = string
-  default     = "0.10.0"
+  default     = "1.8.2"
   description = "Version of cert-manager to install"
 }
 
@@ -210,4 +210,10 @@ variable "creds_output_path" {
   description = "Where to save the id_rsa config file. Should end in a forward slash `/` ."
   type        = string
   default     = "./"
+}
+
+variable "backup_bucket_suffix" {
+  type        = string
+  default     = ""
+  description = "etcd backup S3 bucket name suffix"
 }

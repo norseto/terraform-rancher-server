@@ -1,7 +1,7 @@
 resource "null_resource" "cert-manager-crds" {
   provisioner "local-exec" {
     command = <<EOF
-kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/v${var.certmanager_version}/deploy/manifests/00-crds.yaml
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v${var.certmanager_version}/cert-manager.crds.yaml
 kubectl create namespace cert-manager
 kubectl label namespace cert-manager certmanager.k8s.io/disable-validation=true
 EOF
@@ -93,9 +93,6 @@ resource "rancher2_bootstrap" "admin" {
   provider = rancher2.bootstrap
 
   depends_on = [null_resource.wait_for_rancher]
-
-  current_password = var.rancher_current_password
-  password         = var.rancher_password
 }
 
 resource "rancher2_auth_config_github" "github" {

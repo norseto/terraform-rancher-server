@@ -37,14 +37,16 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-data "helm_repository" "rancher_stable" {
-  name = "rancher-stable"
-  url  = "https://releases.rancher.com/server-charts/stable/"
+data "helm_template" "rancher_stable" {
+  name       = "rancher-stable"
+  repository = "https://releases.rancher.com/server-charts/stable/"
+  chart      = "rancher"
 }
 
-data "helm_repository" "jetstack" {
-  name = "jetstack"
-  url  = "https://charts.jetstack.io"
+data "helm_template" "jetstack" {
+  name       = "jetstack"
+  repository = "https://charts.jetstack.io"
+  chart      = "cert-manager"
 }
 
 data "rancher2_user" "admin" {
