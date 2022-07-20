@@ -90,8 +90,21 @@ variable "r53_domain" {
 }
 
 variable "instance_type" {
-  type    = string
-  default = "t3.large"
+  type        = string
+  default     = "t3.large"
+  description = "default instance type"
+}
+
+variable "master_instances_type" {
+  type        = string
+  default     = ""
+  description = "master node instance type"
+}
+
+variable "worker_instances_type" {
+  type        = string
+  default     = ""
+  description = "worker node instance type"
 }
 
 variable "master_node_count" {

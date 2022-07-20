@@ -78,7 +78,7 @@ resource "aws_launch_template" "rancher_master" {
   count         = local.use_asgs_for_rancher_infra ? 1 : 0
   name_prefix   = "${local.name}-master"
   image_id      = data.aws_ami.ubuntu.id
-  instance_type = local.instance_type
+  instance_type = local.master_instance_type
   key_name      = aws_key_pair.ssh.id
 
   user_data = base64encode(templatefile("${path.module}/files/cloud-config.yaml", { extra_ssh_keys = var.extra_ssh_keys }))
@@ -112,7 +112,7 @@ resource "aws_launch_template" "rancher_worker" {
   count         = local.use_asgs_for_rancher_infra ? 1 : 0
   name_prefix   = "${local.name}-worker"
   image_id      = data.aws_ami.ubuntu.id
-  instance_type = local.instance_type
+  instance_type = local.worker_instance_type
   key_name      = aws_key_pair.ssh.id
 
   user_data = base64encode(templatefile("${path.module}/files/cloud-config.yaml", { extra_ssh_keys = var.extra_ssh_keys }))

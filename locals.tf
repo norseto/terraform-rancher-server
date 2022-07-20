@@ -12,6 +12,9 @@ locals {
   master_node_count = var.master_node_count
   worker_node_count = var.worker_node_count
 
+  master_instances_type = length(var.master_instances_type) > 0 ? var.master_instances_type : local.instance_type
+  worker_instances_type = length(var.worker_instances_type) > 0 ? var.worker_instances_type : local.instance_type
+
   rancher2_auth_config_github_count   = var.rancher2_github_auth_enabled ? 1 : 0
   rancher2_auth_github_user           = length(var.rancher2_github_auth_user) > 0 ? [var.rancher2_github_auth_user] : []
   rancher2_auth_github_org            = length(var.rancher2_github_auth_org) > 0 ? [var.rancher2_github_auth_org] : []
