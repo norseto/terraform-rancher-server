@@ -217,3 +217,9 @@ variable "backup_bucket_suffix" {
   default     = ""
   description = "etcd backup S3 bucket name suffix"
 }
+
+variable "bootstrap_password" {
+  type        = string
+  default     = "nkxq2shl6d92bvlztqpts8bt582gts8bt582grgppx888dbxkkw5sczk7cc7m24"
+  description = "bootstrap password"
+}

@@ -30,6 +30,14 @@ module "rancher_server" {
 }
 ```
 
+## Requirement
+You should install helm, kubectl locally and helm repos are added.
+```
+helm add repo jetstack https://charts.jetstack.io                       
+helm add repo rancher-stable https://releases.rancher.com/server-charts/stable
+helm repo update
+```
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 

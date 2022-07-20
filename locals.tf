@@ -45,4 +45,5 @@ locals {
   use_asgs_for_rancher_infra = var.rancher_nodes_in_asgs
 
   backup_bucket_suffix = length(var.backup_bucket_suffix) > 0 ? "-${var.backup_bucket_suffix}" : ""
+  bootstrap_password = var.bootstrap_password
 }
