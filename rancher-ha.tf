@@ -35,6 +35,8 @@ resource "helm_release" "rancher" {
   version   = "v${local.rancher_version}"
   namespace = "cattle-system"
 
+  create_namespace = true
+
   set {
     name  = "hostname"
     value = "${local.name}.${local.domain}"

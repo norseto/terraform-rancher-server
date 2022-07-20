@@ -39,7 +39,7 @@ data "aws_ami" "ubuntu" {
 
 data "helm_template" "rancher_stable" {
   name       = "rancher-stable"
-  repository = "https://releases.rancher.com/server-charts/stable/"
+  repository = "https://releases.rancher.com/server-charts/stable"
   chart      = "rancher"
 }
 
