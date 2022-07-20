@@ -91,10 +91,28 @@ EOF
   }
 }
 
+resource "null_resource" "get_initial_passwd" {
+  triggers  =  { always_run = "${timestamp()}" }
+  provisioner "local-exec" {
+    command = "kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}' >> ${path.root}/outputs/initialpwd.txt"
+    environment = {
+      KUBECONFIG = local_file.kube_cluster_yaml.filename
+    }
+  }
+  depends_on = [null_resource.wait_for_rancher]
+}
+
+data "local_file" "initial_passwd" {
+  filename = "${path.root}/outputs/initialpwd.txt"
+  depends_on = [null_resource.get_initial_passwd]
+}
+
 resource "rancher2_bootstrap" "admin" {
   provider = rancher2.bootstrap
+  initial_password = data.local_file.initial_passwd.content
+  password = var.rancher_password
 
-  depends_on = [null_resource.wait_for_rancher]
+  depends_on = [data.local_file.initial_passwd]
 }
 
 resource "rancher2_auth_config_github" "github" {
