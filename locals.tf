@@ -12,8 +12,8 @@ locals {
   master_node_count = var.master_node_count
   worker_node_count = var.worker_node_count
 
-  master_instances_type = length(var.master_instances_type) > 0 ? var.master_instances_type : local.instance_type
-  worker_instances_type = length(var.worker_instances_type) > 0 ? var.worker_instances_type : local.instance_type
+  master_instance_type = length(var.master_instance_type) > 0 ? var.master_instance_type : local.instance_type
+  worker_instance_type = length(var.worker_instance_type) > 0 ? var.worker_instance_type : local.instance_type
 
   rancher2_auth_config_github_count   = var.rancher2_github_auth_enabled ? 1 : 0
   rancher2_auth_github_user           = length(var.rancher2_github_auth_user) > 0 ? [var.rancher2_github_auth_user] : []
@@ -28,10 +28,10 @@ locals {
 
   # If not using default vpc in region, use vpc_id passed in
   vpc_id             = data.aws_vpc.default.id
-  aws_elb_subnet_ids = length(var.aws_elb_subnet_ids) > 0 ? var.aws_elb_subnet_ids : data.aws_subnet_ids.available.ids
+  aws_elb_subnet_ids = length(var.aws_elb_subnet_ids) > 0 ? var.aws_elb_subnet_ids : data.aws_subnets.available.ids
 
-  rancher2_master_subnet_ids = length(var.rancher2_master_subnet_ids) > 0 ? var.rancher2_master_subnet_ids : data.aws_subnet_ids.available.ids
-  rancher2_worker_subnet_ids = length(var.rancher2_worker_subnet_ids) > 0 ? var.rancher2_worker_subnet_ids : data.aws_subnet_ids.available.ids
+  rancher2_master_subnet_ids = length(var.rancher2_master_subnet_ids) > 0 ? var.rancher2_master_subnet_ids : data.aws_subnets.available.ids
+  rancher2_worker_subnet_ids = length(var.rancher2_worker_subnet_ids) > 0 ? var.rancher2_worker_subnet_ids : data.aws_subnets.available.ids
 
   rancher2_master_tags = length(var.rancher2_master_custom_tags) > 0 ? var.rancher2_master_custom_tags : var.rancher2_custom_tags
 

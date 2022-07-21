@@ -95,13 +95,13 @@ variable "instance_type" {
   description = "default instance type"
 }
 
-variable "master_instances_type" {
+variable "master_instance_type" {
   type        = string
   default     = ""
   description = "master node instance type"
 }
 
-variable "worker_instances_type" {
+variable "worker_instance_type" {
   type        = string
   default     = ""
   description = "worker node instance type"
