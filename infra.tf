@@ -345,10 +345,18 @@ EOF
 resource "aws_s3_bucket" "etcd_backups" {
   bucket = "${local.name}-rancher-etcd-backup${local.backup_bucket_suffix}"
   acl    = "private"
+}
 
-  versioning {
-    enabled = true
+resource "aws_s3_bucket_versioning" "etcd_backups" {
+  bucket = aws_s3_bucket.etcd_backups.id
+  versioning_configuration {
+    status = "Enabled"
   }
+}
+
+resource "aws_s3_bucket_acl" "etcd_backups" {
+  bucket = aws_s3_bucket.etcd_backups.id
+  acl    = "private"
 }
 
 resource "aws_iam_user" "etcd_backup_user" {

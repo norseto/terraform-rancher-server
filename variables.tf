@@ -30,8 +30,6 @@ variable "rancher2_worker_custom_tags" {
 variable "rancher2_custom_tags" {
   type = map
   default = {
-    DoNotDelete = "true"
-    Owner       = "EIO_Demo"
   }
   description = "Custom tags for Rancher resources"
 }

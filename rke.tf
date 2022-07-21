@@ -37,19 +37,20 @@ resource "rke_cluster" "rancher_server" {
     ]
   }
 
-  services_etcd {
-    # for etcd snapshots
-    backup_config {
-      interval_hours = 12
-      retention      = 6
-      # s3 specific parameters
-      s3_backup_config {
-        access_key  = aws_iam_access_key.etcd_backup_user.id
-        secret_key  = aws_iam_access_key.etcd_backup_user.secret
-        bucket_name = aws_s3_bucket.etcd_backups.id
-        region      = local.rke_backup_region
-        folder      = local.name
-        endpoint    = local.rke_backup_endpoint
+  services {
+    etcd {
+      backup_config {
+        interval_hours = 12
+        retention      = 6
+        # s3 specific parameters
+        s3_backup_config {
+          access_key  = aws_iam_access_key.etcd_backup_user.id
+          secret_key  = aws_iam_access_key.etcd_backup_user.secret
+          bucket_name = aws_s3_bucket.etcd_backups.id
+          region      = local.rke_backup_region
+          folder      = local.name
+          endpoint    = local.rke_backup_endpoint
+        }
       }
     }
   }
